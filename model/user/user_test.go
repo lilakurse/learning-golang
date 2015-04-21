@@ -7,7 +7,7 @@ import (
 func TestUser(t *testing.T) {
  	u := New()
 	fmt.Print("User Name: ",u.Name,"\n")
-	if u.Name != "Lstatus 1ila" {
+	if u.Name != "1ila" {
 		t.Error("bad user name")
 	}
 }
@@ -15,7 +15,8 @@ func TestUser(t *testing.T) {
 func TestUseTwo(t *testing.T) {
 	u := New()
 	fmt.Print("User Name: ",u.Name,"\n")
-	if u.Name != "Lstatus 1ila" {
-		t.Error("bad user name")
+	err := u.Validate()
+	if err != nil {
+		t.Error(err)
 	}
 }
