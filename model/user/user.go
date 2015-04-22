@@ -156,9 +156,5 @@ func New() *User {
 	u.Name = "Lila"
 	u.Age = 20
 	u.Contacts = new(Contacts)
-	u.AddAddress("Obrucheva,13")
-	u.AddEmail("gmail.com")
-	u.AddIms("ghg")
-	u.AddPhone("ttt")
 	return u
 }
