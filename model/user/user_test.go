@@ -17,7 +17,7 @@ func TestUseTwo(t *testing.T) {
 	u := New()
 	fmt.Print("User Name: ", u.Name, "\n")
 	fmt.Print("User Age: ", u.Age, "\n")
-	err := u.Validate()
+	err := u.ValidateUser()
 	if err != nil {
 		t.Error(err)
 	}
