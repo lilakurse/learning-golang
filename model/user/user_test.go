@@ -17,8 +17,18 @@ func TestUseTwo(t *testing.T) {
 	u := New()
 	fmt.Print("User Name: ", u.Name, "\n")
 	fmt.Print("User Age: ", u.Age, "\n")
-	err := u.ValidateUser()
+	err := u.Validate()
 	if err != nil {
 		t.Error(err)
 	}
 }
+/*
+func TestContact(t *testing.T) {
+	u := New()
+	fmt.Print("User Data",u.Contacts,"\n")
+	err :=u.Validate()
+	if err !=nil{
+		t.Error(err)}
+
+}
+*/

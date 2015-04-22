@@ -34,8 +34,7 @@ type User struct {
 	Contacts     *Contacts
 }
 
-const ErrorBadName = "invalid name"
-const ErrorAge = "invalid age value"
+const ErrorBad = "invalid name or age"
 
 func (c ContactType) String() string {
 	return contactTypes[int(c)]
@@ -50,11 +49,12 @@ func (c *Contacts) IsExist(contact *Contact) bool {
 	}
 	return false
 }
-/*
-func(c *Contact) Add(t *Contacts) {
-	*(c.Contacts)= append(*(u.Contacts),t)
+
+//в массив контакты добавляем элменты-контакты
+func (c *Contacts) Add(t *Contact) {
+	*c = append(*c, t)
 }
-*/
+
 func (u *User) AddIms(ims string) (*Contact, error) {
 	i := new(Contact)
 	i.Type = ContactTypeEmail
@@ -66,7 +66,7 @@ func (u *User) AddIms(ims string) (*Contact, error) {
 	if u.Contacts.IsExist(i) {
 		return nil, errors.New("")
 	}
-	//u.Contacts.Add(i)
+	u.Contacts.Add(i)
 	//*(u.Contacts) = append(* (u.Contacts),i)
 	return i, nil
 }
@@ -81,7 +81,7 @@ func (u *User) AddPhone(phone string) (*Contact, error) {
 	if u.Contacts.IsExist(p) {
 		return nil, errors.New("")
 	}
-	//u.Contacts.Add(p)
+	u.Contacts.Add(p)
 	//*(u.Contacts) = append(*(u.Contacts),p)
 	return p, nil
 }
@@ -96,7 +96,7 @@ func (u *User) AddEmail(email string) (*Contact, error) {
 	if u.Contacts.IsExist(e) {
 		return nil, errors.New("")
 	}
-	//u.Contacts.Add(e)
+	u.Contacts.Add(e)
 	//*(u.Contacts) = append(*(u.Contacts),e)
 	return e, nil
 }
@@ -112,19 +112,19 @@ func (u *User) AddAddress(address string) (*Contact, error) {
 	if u.Contacts.IsExist(a) {
 		return nil, errors.New("")
 	}
-	//u.Contacts.Add(a)
+	u.Contacts.Add(a)
 	//*(u.Contacts) = append(*(u.Contacts),a)
 	return a, nil
 }
 
-var Ims = regexp.MustCompile(`^[a-z]`)
+var Ims = regexp.MustCompile(`^\w+$`)
 var Email = regexp.MustCompile(`^[^@]+@[^@.]+\.[^@.]+$`)
-var Phone = regexp.MustCompile(`^[0-9][0-9][0-9][.\-]?[0-9][0-9][0-9][0-9]$`)
+var Phone = regexp.MustCompile(`^[\d\+]{1}[\d\-\(\)]+$`)
 var Address = regexp.MustCompile(`^[a-z]+\,+\s+[0-9][0-9][0-9]+.+[0-9]`)
 
 func (c *Contact) Validate() error {
 	switch c.Type {
-	case  ContactTypeIms:
+	case ContactTypeIms:
 		if !Ims.MatchString(c.Value) {
 			return errors.New("incorrect ims")
 		}
@@ -141,15 +141,13 @@ func (c *Contact) Validate() error {
 			return errors.New("incorrect address")
 		}
 	}
+
 	return nil
 }
 
-func (u *User) ValidateUser() error {
-	if len(u.Name) <= 2 {
-		return errors.New(ErrorBadName)
-	}
-	if u.Age < 18 {
-		return errors.New(ErrorAge)
+func (u *User) Validate() error {
+	if len(u.Name) <= 2 || u.Age < 18 {
+		return errors.New(ErrorBad)
 	}
 	return nil
 }
@@ -158,5 +156,9 @@ func New() *User {
 	u.Name = "Lila"
 	u.Age = 20
 	u.Contacts = new(Contacts)
+	u.AddAddress("Obrucheva,13")
+	u.AddEmail("gmail.com")
+	u.AddIms("ghg")
+	u.AddPhone("ttt")
 	return u
 }
