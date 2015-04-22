@@ -126,7 +126,7 @@ var Address = regexp.MustCompile(`^[a-z]+\,+\s+[0-9][0-9][0-9]+.+[0-9]`)
 func (c *Contact) Validate() error {
 	//var c Contact
 	switch c {
-	case c.Type == ContactTypeIms:
+	case  ContactTypeIms:
 		if !Ims.MatchString(c.Value) {
 			return errors.New("incorrect ims")
 		}
@@ -134,11 +134,11 @@ func (c *Contact) Validate() error {
 		if !Phone.MatchString(c.Value) {
 			return errors.New("incorrect phone")
 		}
-	case c.Type==ContactTypeEmail:
+	case ContactTypeEmail:
 		if !Email.MatchString(c.Value) {
 			return errors.New("incorrect email")
 		}
-	case c.Type==ContactTypeAddress:
+	case ContactTypeAddress:
 		if !Address.MatchString(c.Value) {
 			return errors.New("incorrect address")
 		}
