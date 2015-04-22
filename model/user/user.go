@@ -52,7 +52,6 @@ func (c *Contacts) IsExist(contact *Contact) bool {
 }
 /*
 func(c *Contact) Add(t *Contacts) {
-	//t :=new(Contact)
 	*(c.Contacts)= append(*(u.Contacts),t)
 }
 */
