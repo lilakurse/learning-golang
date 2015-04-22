@@ -68,7 +68,7 @@ func (u *User) AddIms(ims string) (*Contact, error) {
 		return nil, errors.New("")
 	}
 	//u.Contacts.Add(i)
-	*(u.Contacts) = append(* (u.Contacts),i)
+	//*(u.Contacts) = append(* (u.Contacts),i)
 	return i, nil
 }
 func (u *User) AddPhone(phone string) (*Contact, error) {
@@ -83,7 +83,7 @@ func (u *User) AddPhone(phone string) (*Contact, error) {
 		return nil, errors.New("")
 	}
 	//u.Contacts.Add(p)
-	*(u.Contacts) = append(*(u.Contacts),p)
+	//*(u.Contacts) = append(*(u.Contacts),p)
 	return p, nil
 }
 func (u *User) AddEmail(email string) (*Contact, error) {
@@ -98,7 +98,7 @@ func (u *User) AddEmail(email string) (*Contact, error) {
 		return nil, errors.New("")
 	}
 	//u.Contacts.Add(e)
-	*(u.Contacts) = append(*(u.Contacts),e)
+	//*(u.Contacts) = append(*(u.Contacts),e)
 	return e, nil
 }
 
@@ -114,7 +114,7 @@ func (u *User) AddAddress(address string) (*Contact, error) {
 		return nil, errors.New("")
 	}
 	//u.Contacts.Add(a)
-	*(u.Contacts) = append(*(u.Contacts),a)
+	//*(u.Contacts) = append(*(u.Contacts),a)
 	return a, nil
 }
 
@@ -124,13 +124,12 @@ var Phone = regexp.MustCompile(`^[0-9][0-9][0-9][.\-]?[0-9][0-9][0-9][0-9]$`)
 var Address = regexp.MustCompile(`^[a-z]+\,+\s+[0-9][0-9][0-9]+.+[0-9]`)
 
 func (c *Contact) Validate() error {
-	//var c Contact
-	switch c {
+	switch c.Type {
 	case  ContactTypeIms:
 		if !Ims.MatchString(c.Value) {
 			return errors.New("incorrect ims")
 		}
-	case c.Type==ContactTypePhone:
+	case ContactTypePhone:
 		if !Phone.MatchString(c.Value) {
 			return errors.New("incorrect phone")
 		}
