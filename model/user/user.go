@@ -51,9 +51,9 @@ func (c *Contacts) IsExist(contact *Contact) bool {
 	return false
 }
 /*
-func(u *User) Add(t *Contact) {
+func(c *Contact) Add(t *Contacts) {
 	//t :=new(Contact)
-	*(u.Contacts)= append(*(u.Contacts),t)
+	*(c.Contacts)= append(*(u.Contacts),t)
 }
 */
 func (u *User) AddIms(ims string) (*Contact, error) {
