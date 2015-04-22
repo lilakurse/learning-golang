@@ -31,9 +31,9 @@ type testpair struct {
 }
 var tests = []testpair{
 	{"gmail.com","error my",true,ContactTypeEmail},
-	{"123@gmail.com","123@gmail.com",false,ContactTypeEmail},
-	{"789-99-89","789-90-89",true,ContactTypePhone},
-	{"Obrucheva13","Obrucheva13",true,ContactTypeAddress},
+//	{"123@gmail.com","123@gmail.com",false,ContactTypeEmail},
+//	{"789-99-89","789-90-89",true,ContactTypePhone},
+	//{"Obrucheva13","Obrucheva13",true,ContactTypeAddress},
 	{"hjj","hjj",false,ContactTypeIms},
 }
 
@@ -60,7 +60,7 @@ func TestContact(t *testing.T) {
 			}
 		} else {
 			if (v == nil && err != nil) || (v != nil && v.Value != pair.wanted && u.Contacts.IsExist(v)) {
-				t.Errorf("Incorrect %s for %s expected %s got %s", pair.values, pair.wanted,err)
+				t.Errorf("Incorrect %s for %s expected %s got %s",pair.contactType, pair.values, pair.wanted,err)
 			}
 		}
 	}
