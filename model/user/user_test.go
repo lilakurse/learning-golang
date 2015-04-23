@@ -3,6 +3,8 @@ package user
 import (
 	"fmt"
 	"testing"
+	"time"
+	"encoding/json"
 )
 
 func TestUser(t *testing.T) {
@@ -29,6 +31,48 @@ type testpair struct {
 	isError     bool
 	contactType ContactType
 }
+
+var goodUser = []byte(`{
+	"name":"Lila","registration":"2015-04-23T11:58:34.841Z",
+	"contacts":[{"v":"test@mail.ru","t":2},
+				 {"v" :"555-99-69","t":1}]
+	}`)
+
+func TestUserJson (t *testing.T) {
+	u,err := getUserFromJson()
+	if err != nil {
+		t.Error(err)
+	}
+	err = u.Validate()
+	if err != nil {
+		t.Error(err)
+	}
+	answer,err := json.Marshal(u)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Print(string(answer))
+	/*if string(answer) != string(goodUser) {
+		t.Error("Must be equals")
+	}*/
+}
+
+func getUserFromJson() (*User,error) {
+	u := &User{}
+	err := json.Unmarshal(goodUser,u)
+	if err != nil {
+		return nil,err
+	}
+	return u,nil
+}
+
+func getUserWithBirthday () *User {
+	u := New()
+	b := time.Now().AddDate(-10,0,0)
+	u.Birthday = &b
+	return u
+}
+
 
 var tests = []testpair{
 	{"gmail.com", "error my", true, ContactTypeEmail},

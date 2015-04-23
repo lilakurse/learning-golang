@@ -16,8 +16,8 @@ const (
 )
 
 type Contact struct {
-	Value string
-	Type  ContactType
+	Value string `json:"v"`
+	Type  ContactType `json:"t"`
 }
 
 type Contacts []*Contact
@@ -78,6 +78,18 @@ var Email = regexp.MustCompile(`^[^@]+@[^@.]+\.[^@.]+$`)
 var Phone = regexp.MustCompile(`^[\d\+]{1}[\d\-\(\)]+$`)
 var Address = regexp.MustCompile(`^[a-z]+\,+\s+[0-9][0-9][0-9]+.+[0-9]`)
 
+var err []error
+func (c *Contacts) Validate () error {
+	var err error
+	for _,cc := range *c {
+		err=cc.Validate()
+		if err != nil {
+			return errors.New("Error in "+cc.Value+" ("+cc.Type.String()+") : "+err.Error())
+		}
+	}
+	return nil
+}
+
 func (c *Contact) Validate() error {
 	switch c.Type {
 	case ContactTypeIms:
@@ -100,3 +112,5 @@ func (c *Contact) Validate() error {
 
 	return nil
 }
+
+

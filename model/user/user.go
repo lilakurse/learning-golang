@@ -7,11 +7,11 @@ import (
 
 //test user type
 type User struct {
-	Name         string `json:"username"`
-	Registration *time.Time
-	Birthday     *time.Time
-	About        string
-	Contacts     *Contacts
+	Name         string `json:"name"`
+	Registration *time.Time `json:"registration"`
+	Birthday     *time.Time `json:"birthday,omitempty"`
+	About        string `json:"about,omitempty"`
+	Contacts     *Contacts `json:"contacts"`
 }
 
 const ErrorBad = "invalid name"
@@ -32,30 +32,25 @@ func (u *User) AddAddress(address string) (*Contact, error) {
 	return u.Contacts.AddAddress(address)
 }
 
-func (u *User)IsExist(b *time.Time) bool{
-		if u.Birthday !=nil && u.Birthday==b{
-			return true
-		}
-	return false
-}
 
-func (u *User)HowAreYouOld(b *time.Time) (int,error){
-	if u.IsExist(b){
-		return 0,errors.New("no birthday date")
+func (u *User)HowAreYouOld() int{
+	if u.Birthday == nil {
+		return 0
 	}
 	now := time.Now()
-	years := now.Year() - b.Year()
-	if now.YearDay() < b.YearDay(){
+	years := now.Year() - u.Birthday.Year()
+	if now.YearDay() < u.Birthday.YearDay(){
 		years--
 	}
-	return years,nil
+	return years
 }
 
 func (u *User) Validate() error {
 	if len(u.Name) <= 2  {
 		return errors.New(ErrorBad)
 	}
-	return nil
+
+	return u.Contacts.Validate()
 }
 
 func New() *User {
