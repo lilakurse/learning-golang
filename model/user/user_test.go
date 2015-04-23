@@ -35,7 +35,8 @@ type testpair struct {
 var goodUser = []byte(`{
 	"name":"Lila","registration":"2015-04-23T11:58:34.841Z",
 	"contacts":[{"v":"test@mail.ru","t":2},
-				 {"v" :"555-99-69","t":1}]
+				 {"v":"555-99-69","t":1},
+				 {"v":"kupali, 47/10","t":3}]
 	}`)
 
 func TestUserJson (t *testing.T) {
@@ -68,9 +69,15 @@ func getUserFromJson() (*User,error) {
 
 func getUserWithBirthday () *User {
 	u := New()
-	b := time.Now().AddDate(-10,0,0)
+	b := time.Now().AddDate(-20,2,1)
 	u.Birthday = &b
 	return u
+}
+
+func TestUserAge(t *testing.T){
+	u :=New()
+	u = getUserWithBirthday()
+	fmt.Print("user age is :",u.HowAreYouOld())
 }
 
 

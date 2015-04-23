@@ -76,7 +76,7 @@ func (c *Contacts) IsExist(contact *Contact) bool {
 var Ims = regexp.MustCompile(`^\w+$`)
 var Email = regexp.MustCompile(`^[^@]+@[^@.]+\.[^@.]+$`)
 var Phone = regexp.MustCompile(`^[\d\+]{1}[\d\-\(\)]+$`)
-var Address = regexp.MustCompile(`^[a-z]+\,+\s+[0-9][0-9][0-9]+.+[0-9]`)
+var Address = regexp.MustCompile(`^[a-z]+\,+\s+[\d\+]+.+[0-9]`)
 
 var err []error
 func (c *Contacts) Validate () error {
