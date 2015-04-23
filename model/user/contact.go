@@ -3,6 +3,7 @@ package user
 import (
 	"errors"
 	"regexp"
+
 )
 
 type ContactType int
