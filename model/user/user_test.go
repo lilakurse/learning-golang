@@ -34,15 +34,16 @@ type testpair struct {
 
 var goodUser = []byte(`{
 	"name":"Lila","registration":"2015-04-23T11:58:34.841Z",
-	"contacts":[{"v":"test@mail.ru","t":2},
-				 {"v":"555-99-69","t":1},
-				 {"v":"kupali, 47/10","t":3}]
+	"contacts":[{"v":"test@mail.ru","t":"email"},
+				 {"v":"555-99-69","t":"phone"},
+				 {"v":"kupali, 47/10","t":"address"}]
 	}`)
 
 func TestUserJson (t *testing.T) {
 	u,err := getUserFromJson()
-	if err != nil {
+	if err != nil || u == nil {
 		t.Error(err)
+		t.Fail()
 	}
 	err = u.Validate()
 	if err != nil {

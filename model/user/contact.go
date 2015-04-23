@@ -4,30 +4,54 @@ import (
 	"errors"
 	"regexp"
 
+	"fmt"
+
+	"strings"
 )
 
 type ContactType int
 
 const (
-	ContactTypeIms ContactType = iota
+	ContactTypeUndefined ContactType = iota
+	ContactTypeIms
 	ContactTypePhone
 	ContactTypeEmail
 	ContactTypeAddress
 )
 
 type Contact struct {
-	Value string `json:"v"`
+	Value string      `json:"v"`
 	Type  ContactType `json:"t"`
 }
 
 type Contacts []*Contact
 
-var contactTypes = []string{"ims", "phone", "email", "address"}
+var contactTypes = []string{"undefined", "ims", "phone", "email", "address"}
 
 func (c ContactType) String() string {
 	return contactTypes[int(c)]
 }
-
+//поиск строки и выставление ее индекса
+func (c ContactType) lookFor(str string) ContactType {
+	for index, ct := range contactTypes {
+		if ct == str {
+			fmt.Println(ct," = ",str)
+			return ContactType(index)
+		}
+	}
+	return ContactTypeUndefined
+}
+//вытаскиваем значение в string и ищем его в массиве. если нету ->ошибка
+func (c *ContactType)UnmarshalJSON(data []byte) error{
+	*c=c.lookFor(strings.Trim(string(data),`"`))
+	if *c==ContactTypeUndefined{
+		return errors.New("contact type not found")
+	}
+	return nil
+}
+func (c *ContactType)MarshalJSON() ([]byte,error){
+	return []byte(`"`+c.String()+`"`),nil
+}
 //в массив контакты добавляем элменты-контакты
 func (c *Contacts) Add(t *Contact) {
 	*c = append(*c, t)
@@ -79,12 +103,13 @@ var Phone = regexp.MustCompile(`^[\d\+]{1}[\d\-\(\)]+$`)
 var Address = regexp.MustCompile(`^[a-z]+\,+\s+[\d\+]+.+[0-9]`)
 
 var err []error
-func (c *Contacts) Validate () error {
+
+func (c *Contacts) Validate() error {
 	var err error
-	for _,cc := range *c {
-		err=cc.Validate()
+	for _, cc := range *c {
+		err = cc.Validate()
 		if err != nil {
-			return errors.New("Error in "+cc.Value+" ("+cc.Type.String()+") : "+err.Error())
+			return errors.New("Error in " + cc.Value + " (" + cc.Type.String() + ") : " + err.Error())
 		}
 	}
 	return nil
@@ -112,5 +137,3 @@ func (c *Contact) Validate() error {
 
 	return nil
 }
-
-
