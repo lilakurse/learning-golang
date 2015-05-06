@@ -1,7 +1,26 @@
 <component name="libraryTable">
   <library name="GOPATH &lt;learning-golang&gt;">
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../kr" />
+      <root url="file://$PROJECT_DIR$/../../fiam" />
+      <root url="file://$PROJECT_DIR$/../../bitly" />
+      <root url="file://$PROJECT_DIR$/../../daaku" />
+      <root url="file://$PROJECT_DIR$/../../drone" />
+      <root url="file://$PROJECT_DIR$/../../tools" />
+      <root url="file://$PROJECT_DIR$/../../vieux" />
+      <root url="file://$PROJECT_DIR$/../../robfig" />
       <root url="file://$PROJECT_DIR$/../../zenazn" />
+      <root url="file://$PROJECT_DIR$/../../gorilla" />
+      <root url="file://$PROJECT_DIR$/../../garyburd" />
+      <root url="file://$PROJECT_DIR$/../../dgrijalva" />
+      <root url="file://$PROJECT_DIR$/../../kardianos" />
+      <root url="file://$PROJECT_DIR$/../../pelletier" />
+      <root url="file://$PROJECT_DIR$/../../GeertJohan" />
+      <root url="file://$PROJECT_DIR$/../../mreiferson" />
+      <root url="file://$PROJECT_DIR$/../../olekukonko" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../code.google.com" />
+      <root url="file://$PROJECT_DIR$/../../../src-tms.als.local" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
