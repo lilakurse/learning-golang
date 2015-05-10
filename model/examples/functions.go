@@ -2,7 +2,7 @@ package examples
 
 import "fmt"
 
-func half(x int) (int, bool) {
+func Half(x int) (int, bool) {
 	if x%2 == 0 {
 		fmt.Print("1,true")
 		return 1, true
@@ -23,7 +23,7 @@ func Max(args ...int) int {
 	return p_max
 }
 
-func makeOddGenerator() func() uint {
+func MakeOddGenerator() func() uint {
 	i := uint(0)
 	return func() (ret uint) {
 		ret = i
