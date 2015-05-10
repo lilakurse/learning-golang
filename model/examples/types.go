@@ -2,12 +2,12 @@ package examples
 
 import "fmt"
 
-func type(){
+func types() {
 	fmt.Print("Enter the faringate number: ")
 	var input float64
-	fmt.Scanf("%f",&input)
+	fmt.Scanf("%f", &input)
 
-	output:=(input-32)*5/9
+	output := (input - 32) * 5 / 9
 
-	fmt.Print("По Цельсию: ",output)
+	fmt.Print("По Цельсию: ", output)
 }
