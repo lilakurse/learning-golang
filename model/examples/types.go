@@ -1,8 +1,8 @@
-package examples
+package main
 
 import "fmt"
 
-func types() {
+func main() {
 	fmt.Print("Enter the faringate number: ")
 	var input float64
 	fmt.Scanf("%f", &input)
