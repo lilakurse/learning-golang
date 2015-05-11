@@ -65,9 +65,9 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
-
+//C:\Users\Samsung\dev\go\src\github.com\lilakurse\learning-golang\model\examples\tmpl
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
-	t, err := template.ParseFiles(tmpl + ".html")
+	t, err := template.ParseFiles("C:/Users/Samsung/dev/go/src/github.com/lilakurse/learning-golang/model/examples/tmpl/"+tmpl + ".html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
