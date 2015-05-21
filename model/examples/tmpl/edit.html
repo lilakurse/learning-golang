@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <title><h1>Editing {{.Title}}</h1></title>
 </head>
-    <h1>Editing {{.Title}}</h1>
+<h1>Editing {{.Title}}</h1>
 <body>
-    <form action="/save/{{.Title}}" method="POST">
+<form action="/save/{{.Title}}" method="POST">
     <div><textarea name="body" rows="20" cols="80">{{printf "%s" .Body}}</textarea></div>
     <div><input type="submit" value="Save"></div>
-    </form>
+</form>
 </body>
 </html>
-

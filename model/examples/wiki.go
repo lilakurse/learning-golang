@@ -65,6 +65,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 }
+
 //C:\Users\Samsung\dev\go\src\github.com\lilakurse\learning-golang\model\examples\tmpl
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	t, err := template.ParseFiles("C:/Users/Samsung/dev/go/src/github.com/lilakurse/learning-golang/model/examples/tmpl/"+tmpl + ".html")
@@ -77,10 +78,11 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
-
+/*
 func main() {
 	http.HandleFunc("/view/", viewHandler)
 	http.HandleFunc("/edit/", editHandler)
 	http.HandleFunc("/save/", saveHandler)
-	http.ListenAndServe(":8080", nil)
+	//http.ListenAndServe(":8080", nil)
 }
+*/
