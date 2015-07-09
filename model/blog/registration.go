@@ -22,6 +22,8 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("val:", strings.Join(v, ""))
 	}
 	fmt.Fprintf(w, "WELCOME") // write data to response
+
+//	http.Redirect(w,r,"C:/Users/Samsung/dev/go/src/github.com/lilakurse/learning-golang/model/blog/tmpl/welcom.html",http.StatusFound)
 }
 
 var mongoconn *mongo.MongoDB
@@ -29,7 +31,7 @@ var mongoconn *mongo.MongoDB
 func registration(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("C:/Users/Samsung/dev/go/src/github.com/lilakurse/learning-golang/model/blog/tmpl/registration" + ".html")
+		t, _ := template.ParseFiles("C:/Users/Samsung/dev/go/src/github.com/lilakurse/learning-golang/model/blog/tmpl/login" + ".html")
 		t.Execute(w, nil)
 	} else {
 		r.ParseForm()
@@ -44,7 +46,9 @@ func registration(w http.ResponseWriter, r *http.Request) {
 		mongoconn.Add_user(name, password, email)
 
 	}
+
 }
+
 func main() {
 	http.HandleFunc("/", sayhelloName) // setting router rule
 	http.HandleFunc("/registration", registration)
@@ -54,6 +58,6 @@ func main() {
 	}
 	mongoconn=mongo.Mongoconn()
 	mongoconn.Connection("127.0.0.1")
-	defer mongoconn.Stop()
+	//defer mongoconn.Stop()
 
 }

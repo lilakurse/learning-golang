@@ -2,16 +2,19 @@ package user
 
 import (
 	"errors"
+	"gopkg.in/mgo.v2/bson"
+	"math/rand"
 	"time"
 )
 
 //test user type
 type User struct {
-	Name         string `json:"name"`
-	Registration *time.Time `json:"registration"`
-	Birthday     *time.Time `json:"birthday,omitempty"`
-	About        string `json:"about,omitempty"`
-	Contacts     *Contacts `json:"contacts"`
+	ID           bson.ObjectId `json:"id" bson:"_id"`
+	Name         string        `json:"name"`
+	Registration *time.Time    `json:"registration"`
+	Birthday     *time.Time    `json:"birthday,omitempty"`
+	About        string        `json:"about,omitempty"`
+	Contacts     *Contacts     `json:"contacts"`
 }
 
 const ErrorBad = "invalid name"
@@ -32,21 +35,20 @@ func (u *User) AddAddress(address string) (*Contact, error) {
 	return u.Contacts.AddAddress(address)
 }
 
-
-func (u *User)HowAreYouOld() int{
+func (u *User) HowAreYouOld() int {
 	if u.Birthday == nil {
 		return 0
 	}
 	now := time.Now()
 	years := now.Year() - u.Birthday.Year()
-	if now.YearDay() < u.Birthday.YearDay(){
+	if now.YearDay() < u.Birthday.YearDay() {
 		years--
 	}
 	return years
 }
 
 func (u *User) Validate() error {
-	if len(u.Name) <= 2  {
+	if len(u.Name) <= 2 {
 		return errors.New(ErrorBad)
 	}
 
@@ -58,4 +60,20 @@ func New() *User {
 	u.Name = "Lila"
 	u.Contacts = new(Contacts)
 	return u
+}
+func NewUserWithAllFields() *User {
+	user := new(User)
+	user.ID = bson.NewObjectId()
+	user.Name = "Lila"
+	user.About = "All fields are valid"
+	user.Contacts = new(Contacts)
+	user.Contacts.AddAddress("Moscow", ContactTypeAddress)
+	user.Contacts.AddEmail("lila@gmail.com", ContactTypeEmail)
+	user.Contacts.AddIms("Skype", ContactTypeIms)
+	user.Contacts.AddPhone("+79265558978")
+	registration := time.Now().UTC()
+	user.Registration = &registration
+	birthday := time.Now().AddDate(-rand.Intn(100), -rand.Intn(12), -rand.Intn(365))
+	user.Birthday = &birthday
+	return user
 }
