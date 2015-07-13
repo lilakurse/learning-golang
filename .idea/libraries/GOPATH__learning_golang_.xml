@@ -9,12 +9,14 @@
       <root url="file://$PROJECT_DIR$/../../drone" />
       <root url="file://$PROJECT_DIR$/../../tools" />
       <root url="file://$PROJECT_DIR$/../../vieux" />
+      <root url="file://$PROJECT_DIR$/../../golang" />
       <root url="file://$PROJECT_DIR$/../../jtolds" />
       <root url="file://$PROJECT_DIR$/../../robfig" />
       <root url="file://$PROJECT_DIR$/../../vektra" />
       <root url="file://$PROJECT_DIR$/../../zenazn" />
       <root url="file://$PROJECT_DIR$/../../gorilla" />
       <root url="file://$PROJECT_DIR$/../../garyburd" />
+      <root url="file://$PROJECT_DIR$/../../stretchr" />
       <root url="file://$PROJECT_DIR$/../../dgrijalva" />
       <root url="file://$PROJECT_DIR$/../../kardianos" />
       <root url="file://$PROJECT_DIR$/../../pelletier" />

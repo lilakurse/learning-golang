@@ -38,8 +38,8 @@ func (m *MongoDB) Add_user(username, password, email string)(err error){
 	m.session.SetMode(mgo.Monotonic, true)
 	c :=m.session.DB("blog").C("blog")
 	//insert
-	//err = c.Insert(&User{username,email,password})
-	err = c.Insert(bson.M{"name":username,"password":password,"email":email})  //еще один способ сделать insert
+	err = c.Insert(&User{username,email,password})
+	//err = c.Insert(bson.M{"name":username,"password":password,"email":email})  //еще один способ сделать insert
 	if err!=nil{
 		panic(err)
 	}

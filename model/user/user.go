@@ -7,6 +7,14 @@ import (
 	"time"
 )
 
+////////////
+type UserFilter struct {
+	Name  string
+	About string
+}
+
+///////////////
+
 //test user type
 type User struct {
 	ID           bson.ObjectId `json:"id" bson:"_id"`
@@ -67,9 +75,9 @@ func NewUserWithAllFields() *User {
 	user.Name = "Lila"
 	user.About = "All fields are valid"
 	user.Contacts = new(Contacts)
-	user.Contacts.AddAddress("Moscow", ContactTypeAddress)
-	user.Contacts.AddEmail("lila@gmail.com", ContactTypeEmail)
-	user.Contacts.AddIms("Skype", ContactTypeIms)
+	user.Contacts.AddAddress("Moscow")
+	user.Contacts.AddEmail("lila@gmail.com")
+	user.Contacts.AddIms("Skype")
 	user.Contacts.AddPhone("+79265558978")
 	registration := time.Now().UTC()
 	user.Registration = &registration
@@ -77,3 +85,14 @@ func NewUserWithAllFields() *User {
 	user.Birthday = &birthday
 	return user
 }
+
+/*
+func NewWithID() *User {
+	user := new(User)
+	user.ID = bson.NewObjectId()
+	user.Contacts = new(Contacts)
+	registration := time.Now().UTC()
+	user.Registration = &registration
+	return user
+}
+*/
